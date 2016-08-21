@@ -1,6 +1,8 @@
 package dao.test.impl;
 
 import dao.test.StudentTestDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 import test.Student;
 
@@ -9,8 +11,12 @@ import java.util.Date;
 @Repository
 public class StudentTestDaoImpl implements StudentTestDao {
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     @Override
     public void insert(Student entity) {
+        mongoTemplate.insert(entity);
         System.out.println("insert student success");
     }
 

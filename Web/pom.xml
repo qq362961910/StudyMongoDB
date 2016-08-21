@@ -57,6 +57,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <username>amen</username>
                 <mongodb.hosts>localhost:20001,localhost:20002,localhost:20003</mongodb.hosts>
             </properties>
         </profile>

@@ -7,6 +7,14 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
 
+        <mongo:mongo-client id="mongo" replica-set="localhost:20001,localhost:20002,localhost:20003"/>
+
+        <mongo:db-factory id="dbFactory" dbname="vr" mongo-ref="mongo"/>
+
+        <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+                <constructor-arg name="mongoDbFactory" ref="dbFactory"/>
+        </bean>
+
         <context:component-scan base-package="dao,service"/>
 
 </beans>

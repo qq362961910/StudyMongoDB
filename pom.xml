@@ -14,6 +14,7 @@
         <module>Web</module>
         <module>Entity</module>
         <module>Base</module>
+        <module>Task</module>
     </modules>
 
     <parent>

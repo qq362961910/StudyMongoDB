@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- 分布式任务管理器 -->
+    <bean id="zkScheduleManager" class="cn.uncode.schedule.ZKScheduleManager"
+          init-method="init">
+        <property name="zkConfig">
+            <map>
+                <entry key="zkConnectString" value="127.0.0.1:2181" />
+                <entry key="rootPath" value="/uncode/schedule" />
+                <entry key="zkSessionTimeout" value="60000" />
+                <!--<entry key="userName" value="ScheduleAdmin" />
+                <entry key="password" value="password" />-->
+                <entry key="isCheckParentPath" value="true" />
+                <entry key="ipBlacklist" value="127.0.0.2,127.0.0.3" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="taskTest" class="task.TaskTest"/>
+
+    <task:scheduled-tasks scheduler="zkScheduleManager">
+        <task:scheduled ref="taskTest" method="work"  fixed-rate="20000"/>
+    </task:scheduled-tasks>
+
+</beans>

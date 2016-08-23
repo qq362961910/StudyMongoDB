@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>mongodb</artifactId>
+        <groupId>study</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>mongodb.task</artifactId>
+
+    <dependencies>
+        <!-- 添加此依赖需要从开源中国或github下载源码打包本地安装,https://git.oschina.net/uncode/uncode-schedule.git -->
+        <dependency>
+            <groupId>cn.uncode</groupId>
+            <artifactId>uncode-schedule</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

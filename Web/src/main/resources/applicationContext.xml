@@ -20,4 +20,6 @@
 
         <context:component-scan base-package="dao,service"/>
 
+        <import resource="spring-task.xml"/>
+
 </beans>

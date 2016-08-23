@@ -24,7 +24,7 @@
     <bean id="taskTest" class="task.TaskTest"/>
 
     <task:scheduled-tasks scheduler="zkScheduleManager">
-        <task:scheduled ref="taskTest" method="work"  fixed-rate="20000"/>
+        <task:scheduled ref="taskTest" initial-delay="0" method="work"  fixed-rate="20000"/>
     </task:scheduled-tasks>
 
 </beans>

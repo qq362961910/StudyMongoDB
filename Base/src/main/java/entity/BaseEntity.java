@@ -1,14 +1,18 @@
 package entity;
 
-public class BaseEntity {
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
-    private Long id;
+public abstract class BaseEntity {
 
-    public Long getId() {
+    @Id
+    private ObjectId id;
+
+    public ObjectId getId() {
         return id;
     }
 
-    public BaseEntity setId(Long id) {
+    public BaseEntity setId(ObjectId id) {
         this.id = id;
         return this;
     }

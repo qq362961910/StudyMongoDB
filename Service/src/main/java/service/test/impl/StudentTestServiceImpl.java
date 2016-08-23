@@ -1,10 +1,10 @@
 package service.test.impl;
 
 import dao.test.StudentTestDao;
+import entity.test.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.test.StudentTestService;
-import test.Student;
 
 @Service
 public class StudentTestServiceImpl implements StudentTestService {

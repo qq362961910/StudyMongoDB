@@ -1,7 +1,8 @@
 package service.test;
 
-import service.BaseService;
-import test.Student;
 
-public interface StudentTestService extends BaseService<Student, Long>{
+import entity.test.Student;
+import service.BaseService;
+
+public interface StudentTestService extends BaseService<Student, Long> {
 }

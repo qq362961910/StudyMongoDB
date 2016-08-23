@@ -10,12 +10,24 @@
         <!-- 分片时使用 -->
         <!--<mongo:mongo-client id="mongo" replica-set="localhost:20001,localhost:20002,localhost:20003"/>-->
 
-        <mongo:mongo-client id="mongo" host="localhost" port="27017"/>
+        <context:property-placeholder location="classpath:prop/env.properties"/>
 
-        <mongo:db-factory id="dbFactory" dbname="vr" mongo-ref="mongo"/>
+        <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+                <property name="location" value="classpath:prop/env.properties"/>
+        </bean>-->
+
+        <mongo:mongo-client id="mongo" host="${mongo.host}" port="${mongo.port}"/>
+
+        <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo"  dbname="${mongo.db}"/>
+
+        <mongo:mapping-converter id="mongoConverter" base-package="entity">
+                <mongo:custom-converters base-package="entity" />
+        </mongo:mapping-converter>
 
         <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-                <constructor-arg name="mongoDbFactory" ref="dbFactory"/>
+                <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+                <constructor-arg ref="mongoConverter" />
+                <property name="writeConcern" value="ACKNOWLEDGED" />
         </bean>
 
         <context:component-scan base-package="dao,service"/>

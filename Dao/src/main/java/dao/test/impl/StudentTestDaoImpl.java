@@ -1,10 +1,10 @@
 package dao.test.impl;
 
 import dao.test.StudentTestDao;
+import entity.test.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
-import test.Student;
 
 import java.util.Date;
 
@@ -22,6 +22,7 @@ public class StudentTestDaoImpl implements StudentTestDao {
 
     @Override
     public void update(Student entity) {
+
         System.out.println("update student success");
     }
 
@@ -33,7 +34,7 @@ public class StudentTestDaoImpl implements StudentTestDao {
     @Override
     public Student selectById(Long id) {
         Student student = new Student();
-        student.setId(id);
+//        student.setId(id);
         student.setAge(18);
         student.setBirthday(new Date());
         student.setName("xiaoming");

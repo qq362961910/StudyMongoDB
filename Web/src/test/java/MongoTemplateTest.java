@@ -1,9 +1,9 @@
+import entity.test.Student;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import service.test.StudentTestService;
-import test.Student;
 
 import java.util.Date;
 
@@ -20,7 +20,7 @@ public class MongoTemplateTest {
     @Test
     public void testInsert(){
         Student student = new Student();
-        student.setId(1l);
+//        student.setId(1l);
         student.setName("xiaowang");
         student.setAge(18);
         student.setBirthday(new Date());

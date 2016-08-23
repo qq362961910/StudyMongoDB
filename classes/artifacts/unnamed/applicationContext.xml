@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
+
+        <!-- 分片时使用 -->
+        <!--<mongo:mongo-client id="mongo" replica-set="localhost:20001,localhost:20002,localhost:20003"/>-->
+
+        <context:property-placeholder location="classpath:prop/env.properties"/>
+
+        <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+                <property name="location" value="classpath:prop/env.properties"/>
+        </bean>-->
+
+        <mongo:mongo-client id="mongo" host="${mongo.host}" port="${mongo.port}"/>
+
+        <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo"  dbname="${mongo.db}"/>
+
+        <mongo:mapping-converter id="mongoConverter" base-package="entity">
+                <mongo:custom-converters base-package="entity" />
+        </mongo:mapping-converter>
+
+        <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+                <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+                <constructor-arg ref="mongoConverter" />
+                <property name="writeConcern" value="ACKNOWLEDGED" />
+        </bean>
+
+        <context:component-scan base-package="dao,service"/>
+
+        <import resource="spring-task.xml"/>
+
+</beans>

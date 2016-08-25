@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="geoConsumer" class="kafka.SimpleKafkaConsumer" init-method="init">
+        <property name="props">
+            <props>
+                <prop key="bootstrap.servers">${bootstrap.servers}</prop>
+                <prop key="auto.commit.enable">${auto.commit.enable}</prop>
+                <prop key="auto.commit.interval.ms">${auto.commit.interval.ms}</prop>
+                <prop key="group.id">${group.id}</prop>
+                <prop key="session.timeout.ms">${session.timeout.ms}</prop>
+                <prop key="key.deserializer">${key.deserializer}</prop>
+                <prop key="value.deserializer">${value.deserializer}</prop>
+            </props>
+        </property>
+        <property name="topics">
+            <list>
+                <value>${geo.topic}</value>
+            </list>
+        </property>
+    </bean>
+</beans>

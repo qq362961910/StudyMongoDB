@@ -33,5 +33,6 @@
         <context:component-scan base-package="dao,service"/>
 
         <import resource="spring-task.xml"/>
+        <import resource="spring-consumer-kafka.xml"/>
 
 </beans>

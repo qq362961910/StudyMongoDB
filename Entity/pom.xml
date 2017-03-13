@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>entity</artifactId>
+    <artifactId>mongodb.entity</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>study</groupId>
-            <artifactId>base</artifactId>
+            <artifactId>mongodb.base</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -31,8 +31,8 @@
     <property name="location" value="classpath:prop/env.properties"/>
     </bean>-->
 
-    <import resource="spring-task.xml"/>
-    <import resource="spring-consumer-kafka.xml"/>
-    <import resource="spring-dubbo-provider.xml"/>
+    <!--<import resource="spring-task.xml"/>-->
+    <!--<import resource="spring-consumer-kafka.xml"/>-->
+    <!--<import resource="spring-dubbo-provider.xml"/>-->
 
 </beans>

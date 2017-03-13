@@ -4,7 +4,7 @@ import config.DubboClientConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ClientStart {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DubboClientConfig.class);
 //        context.refresh();
         TestServiceInvoker client = context.getBean(TestServiceInvoker.class);

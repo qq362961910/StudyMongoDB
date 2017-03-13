@@ -16,9 +16,9 @@ public class HelloWorld {
     private StudentTestService studentTestService;
 
     @ResponseBody
-    @RequestMapping(value = "/home")
-    public Map home(){
-        return new HashMap<String, Object>(){{
+    @RequestMapping("/home")
+    public Map home() {
+        return new HashMap<String, Object>() {{
             put("success", true);
         }};
     }

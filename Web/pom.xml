@@ -23,8 +23,72 @@
             <artifactId>mongodb.task</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Servlet+JSP+JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>0.10.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>zookeeper</artifactId>
+                    <groupId>org.apache.zookeeper</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>zkclient</artifactId>
+                    <groupId>com.101tec</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.7</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -65,8 +129,9 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <username>amen</username>
-                <mongodb.hosts>localhost:20001,localhost:20002,localhost:20003</mongodb.hosts>
+                <mongo.db>vr</mongo.db>
+                <mongo.credentials>vr:123456@vr</mongo.credentials>
+                <mongo.replicaSet>192.168.4.200:22000,192.168.4.200:22001,192.168.4.200:22002</mongo.replicaSet>
             </properties>
         </profile>
 
@@ -74,7 +139,9 @@
         <profile>
             <id>test</id>
             <properties>
-                <username>amen</username>
+                <mongo.db>vr</mongo.db>
+                <mongo.credentials>vr:123456@vr</mongo.credentials>
+                <mongo.replicaSet>localhost:20001,localhost:20002,localhost:20003</mongo.replicaSet>
             </properties>
         </profile>
 
@@ -82,7 +149,9 @@
         <profile>
             <id>product</id>
             <properties>
-                <username>amen</username>
+                <mongo.db>vr</mongo.db>
+                <mongo.credentials>vr:123456@vr</mongo.credentials>
+                <mongo.replicaSet>localhost:20001,localhost:20002,localhost:20003</mongo.replicaSet>
             </properties>
         </profile>
     </profiles>

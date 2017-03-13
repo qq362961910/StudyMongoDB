@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan
 @EnableMongoRepositories
 @PropertySource(value = {"classpath:prop/env.properties"})
-public class ApplicationConfig extends AbstractMongoConfiguration{
+public class ApplicationConfig extends AbstractMongoConfiguration {
 
 
     private static final String MONGO_HOST = "mongo.host";

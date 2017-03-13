@@ -25,13 +25,13 @@ public class XmlConfigMongoTemplateTest {
     private MongoTemplate mongoTemplate;
 
     @Before
-    public void init(){
+    public void init() {
         mongoTemplate = applicationContext.getBean(MongoTemplate.class);
     }
 
 
     @Test
-    public void testInsertStudent(){
+    public void testInsertStudent() {
 
         Address address = new Address();
         address.setCountry("China");
@@ -57,7 +57,7 @@ public class XmlConfigMongoTemplateTest {
     }
 
     @Test
-    public void testFindStudentById(){
+    public void testFindStudentById() {
 
         List<Student> studentList = mongoTemplate.find(new Query(), Student.class);
 
@@ -65,22 +65,22 @@ public class XmlConfigMongoTemplateTest {
     }
 
     @Test
-    public void testUpdateStudent(){
+    public void testUpdateStudent() {
 
         Query query = new Query(new Criteria("_id").is(new ObjectId("57bc1204bfeef61300d5d599")));
-        Update update = new Update().set("email","362961910@qq.com.update");
-        mongoTemplate.updateFirst(query,update,Student.class);
+        Update update = new Update().set("email", "362961910@qq.com.update");
+        mongoTemplate.updateFirst(query, update, Student.class);
 
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         Query query = new Query(new Criteria("_id").is(new ObjectId("57bc1204bfeef61300d5d599")));
-        mongoTemplate.remove(query,Student.class);
+        mongoTemplate.remove(query, Student.class);
     }
 
     @After
-    public void destroy(){
+    public void destroy() {
         applicationContext.close();
     }
 

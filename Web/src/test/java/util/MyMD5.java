@@ -60,41 +60,40 @@ public class MyMD5 {
         }
 
         //处理尾巴
-        int tailLength = inputByteLength%64;
+        int tailLength = inputByteLength % 64;
         byte[] tempBytes = new byte[64];
         if (tailLength <= 56) {
-            for (int i=0; i<tailLength; i++) {
+            for (int i = 0; i < tailLength; i++) {
                 tempBytes[i] = inputBytes[inputByteLength - tailLength + i];
             }
             if (tailLength < 56) {
-                tempBytes[tailLength] = (byte)(1<<7);
-                for (int i=1; i<56 - tailLength; i++) {
+                tempBytes[tailLength] = (byte) (1 << 7);
+                for (int i = 1; i < 56 - tailLength; i++) {
                     tempBytes[tailLength + i] = 0;
                 }
             }
-            int len = inputByteLength<<3;
-            for (int i=0; i<8; i++) {
-                tempBytes[56 + i] = (byte)len;
-                len>>=8;
+            int len = inputByteLength << 3;
+            for (int i = 0; i < 8; i++) {
+                tempBytes[56 + i] = (byte) len;
+                len >>= 8;
             }
             groups = divGroup(tempBytes, 0);
             trans(groups);
             //将Hash值转换成十六进制的字符串
-            String resStr="";
-            long temp=0;
-            for(int i=0;i<4;i++){
-                for(int j=0;j<4;j++){
-                    temp=result[i]&0x0FL;
-                    String a=hexs[(int)(temp)];
-                    result[i]=result[i]>>4;
-                    temp=result[i]&0x0FL;
-                    resStr+=hexs[(int)(temp)]+a;
-                    result[i]=result[i]>>4;
+            String resStr = "";
+            long temp = 0;
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    temp = result[i] & 0x0FL;
+                    String a = hexs[(int) (temp)];
+                    result[i] = result[i] >> 4;
+                    temp = result[i] & 0x0FL;
+                    resStr += hexs[(int) (temp)] + a;
+                    result[i] = result[i] >> 4;
                 }
             }
             return resStr;
-        }
-        else {
+        } else {
             return "";
         }
 
@@ -211,31 +210,31 @@ public class MyMD5 {
      */
     private static long FF(long a, long b, long c, long d, long mj, long s, long ti) {
         a += F(b, c, d) + mj + ti;
-        a = ((a&0xFFFFFFFFL)<<s | (a&0xFFFFFFFFL)>>>(32-s));
+        a = ((a & 0xFFFFFFFFL) << s | (a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return a&0xFFFFFFFFL;
+        return a & 0xFFFFFFFFL;
     }
 
     private static long GG(long a, long b, long c, long d, long mj, long s, long ti) {
-        a += (G(b, c, d)&0xFFFFFFFFL) + mj + ti;
-        a = ((a&0xFFFFFFFFL)<<s) | ((a&0xFFFFFFFFL)>>>(32-s));
+        a += (G(b, c, d) & 0xFFFFFFFFL) + mj + ti;
+        a = ((a & 0xFFFFFFFFL) << s) | ((a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return a&0xFFFFFFFFL;
+        return a & 0xFFFFFFFFL;
     }
 
     private static long HH(long a, long b, long c, long d, long mj, long s, long ti) {
-        a += (H(b, c, d)&0xFFFFFFFFL) + mj + ti;
-        a = ((a&0xFFFFFFFFL)<<s) | ((a&0xFFFFFFFFL)>>>(32-s));
+        a += (H(b, c, d) & 0xFFFFFFFFL) + mj + ti;
+        a = ((a & 0xFFFFFFFFL) << s) | ((a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return a&0xFFFFFFFFL;
+        return a & 0xFFFFFFFFL;
 
     }
 
     private static long II(long a, long b, long c, long d, long mj, long s, long ti) {
-        a += (I(b, c, d)&0xFFFFFFFFL) + mj + ti;
-        a = ((a&0xFFFFFFFFL)<<s) | ((a&0xFFFFFFFFL)>>>(32-s));
+        a += (I(b, c, d) & 0xFFFFFFFFL) + mj + ti;
+        a = ((a & 0xFFFFFFFFL) << s) | ((a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return a&0xFFFFFFFFL;
+        return a & 0xFFFFFFFFL;
 
     }
 //E10ADC3949BA59ABBE56E057F20F883E

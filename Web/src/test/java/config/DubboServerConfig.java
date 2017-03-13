@@ -32,6 +32,7 @@ public class DubboServerConfig {
         applicationConfig.setName("server_application_name");
         return applicationConfig;
     }
+
     /*与<dubbo:registry/>相当*/
     @Bean
     public RegistryConfig registryConfig() {
@@ -39,10 +40,11 @@ public class DubboServerConfig {
         registryConfig.setAddress("zookeeper://127.0.0.1:2181");
         return registryConfig;
     }
+
     /*与<dubbo:protocol/>相当*/
     @Bean
-    public ProtocolConfig protocolConfig(){
-        ProtocolConfig protocolConfig=new ProtocolConfig("dubbo",20880);
+    public ProtocolConfig protocolConfig() {
+        ProtocolConfig protocolConfig = new ProtocolConfig("dubbo", 20880);
         protocolConfig.setSerialization("java");//默认为hessian2,但不支持无参构造函数类,而这种方式的效率很低
         return protocolConfig;
     }

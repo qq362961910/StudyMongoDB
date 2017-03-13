@@ -2,7 +2,7 @@ package entity.test;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-public class Book{
+public class Book {
 
     private String bookName;
 

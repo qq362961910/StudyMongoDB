@@ -10,13 +10,13 @@
           init-method="init">
         <property name="zkConfig">
             <map>
-                <entry key="zkConnectString" value="127.0.0.1:2181" />
-                <entry key="rootPath" value="/uncode/schedule" />
-                <entry key="zkSessionTimeout" value="60000" />
+                <entry key="zkConnectString" value="127.0.0.1:2181"/>
+                <entry key="rootPath" value="/uncode/schedule"/>
+                <entry key="zkSessionTimeout" value="60000"/>
                 <!--<entry key="userName" value="ScheduleAdmin" />
                 <entry key="password" value="password" />-->
-                <entry key="isCheckParentPath" value="true" />
-                <entry key="ipBlacklist" value="127.0.0.2,127.0.0.3" />
+                <entry key="isCheckParentPath" value="true"/>
+                <entry key="ipBlacklist" value="127.0.0.2,127.0.0.3"/>
             </map>
         </property>
     </bean>
@@ -24,7 +24,7 @@
     <bean id="taskTest" class="task.TaskTest"/>
 
     <task:scheduled-tasks scheduler="zkScheduleManager">
-        <task:scheduled ref="taskTest" initial-delay="0" method="work"  fixed-rate="20000"/>
+        <task:scheduled ref="taskTest" initial-delay="0" method="work" fixed-rate="20000"/>
     </task:scheduled-tasks>
 
 </beans>

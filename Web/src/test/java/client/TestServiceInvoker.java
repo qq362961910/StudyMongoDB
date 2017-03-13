@@ -10,7 +10,7 @@ public class TestServiceInvoker {
     @Reference(check = false, version = "1.0")
     private TestService testService;
 
-    public String invokeGetName(){
+    public String invokeGetName() {
         return testService.getName();
     }
 

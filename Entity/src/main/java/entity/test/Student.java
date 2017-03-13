@@ -11,9 +11,9 @@ import java.util.Set;
 
 /**
  * 学生
- * */
+ */
 @Document
-public class Student extends BaseEntity{
+public class Student extends BaseEntity {
 
     @Field("name")
     private String name;

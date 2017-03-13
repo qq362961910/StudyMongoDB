@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document
-public class Address{
+public class Address {
 
     @Field(value = "country")
     private String country;

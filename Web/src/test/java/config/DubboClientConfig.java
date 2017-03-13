@@ -1,7 +1,6 @@
 package config;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.AnnotationBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ public class DubboClientConfig {
         annotationBean.setPackage("client");
         return annotationBean;
     }
+
     /*与<dubbo:application/>相当.*/
     @Bean
     public ApplicationConfig applicationConfig() {
@@ -32,6 +32,7 @@ public class DubboClientConfig {
         applicationConfig.setName("server_application_name");
         return applicationConfig;
     }
+
     /*与<dubbo:registry/>相当*/
     @Bean
     public RegistryConfig registryConfig() {

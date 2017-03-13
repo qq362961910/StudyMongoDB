@@ -1,12 +1,12 @@
 package util;
 
 public class MD5 {
-    static final String hexs[]={"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
+    static final String hexs[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
     //标准的幻数
-    private static final long A=0x67452301L;
-    private static final long B=0xefcdab89L;
-    private static final long C=0x98badcfeL;
-    private static final long D=0x10325476L;
+    private static final long A = 0x67452301L;
+    private static final long B = 0xefcdab89L;
+    private static final long C = 0x98badcfeL;
+    private static final long D = 0x10325476L;
 
 
     //下面这些S11-S44实际上是一个4*4的矩阵，在四轮循环运算中用到
@@ -31,75 +31,75 @@ public class MD5 {
     static final int S44 = 21;
 
     //java不支持无符号的基本数据（unsigned）
-    private long [] result={A,B,C,D};//存储hash结果，共4×32=128位，初始化值为（幻数的级联）
+    private long[] result = {A, B, C, D};//存储hash结果，共4×32=128位，初始化值为（幻数的级联）
 
-    public static void main(String[]args){
-        MD5 md=new MD5();
-        System.out.println("md5(123456)="+md.digest("123456"));
+    public static void main(String[] args) {
+        MD5 md = new MD5();
+        System.out.println("md5(123456)=" + md.digest("123456"));
     }
 
-    private String digest(String inputStr){
-        byte [] inputBytes=inputStr.getBytes();
-        int byteLen=inputBytes.length;//长度（字节）
-        int groupCount=0;//完整分组的个数
-        groupCount=byteLen/64;//每组512位（64字节）
-        long []groups=null;//每个小组(32字节)再细分后的16个小组(4字节)
+    private String digest(String inputStr) {
+        byte[] inputBytes = inputStr.getBytes();
+        int byteLen = inputBytes.length;//长度（字节）
+        int groupCount = 0;//完整分组的个数
+        groupCount = byteLen / 64;//每组512位（64字节）
+        long[] groups = null;//每个小组(32字节)再细分后的16个小组(4字节)
 
         //处理每一个完整 分组
-        for(int step=0;step<groupCount;step++){
-            groups=divGroup(inputBytes,step*64);
+        for (int step = 0; step < groupCount; step++) {
+            groups = divGroup(inputBytes, step * 64);
             trans(groups);//处理分组，核心算法
         }
 
         //处理完整分组后的尾巴
-        int rest=byteLen%64;//512位分组后的余数
-        byte [] tempBytes=new byte[64];
-        if(rest<=56){
-            for(int i=0;i<rest;i++)
-                tempBytes[i]=inputBytes[byteLen-rest+i];
-            if(rest<56){
-                tempBytes[rest]=(byte)(1<<7);
-                for(int i=1;i<56-rest;i++)
-                    tempBytes[rest+i]=0;
+        int rest = byteLen % 64;//512位分组后的余数
+        byte[] tempBytes = new byte[64];
+        if (rest <= 56) {
+            for (int i = 0; i < rest; i++)
+                tempBytes[i] = inputBytes[byteLen - rest + i];
+            if (rest < 56) {
+                tempBytes[rest] = (byte) (1 << 7);
+                for (int i = 1; i < 56 - rest; i++)
+                    tempBytes[rest + i] = 0;
             }
-            long len=(long)(byteLen<<3);
-            for(int i=0;i<8;i++){
-                tempBytes[56+i]=(byte)(len&0xFFL);
-                len=len>>8;
+            long len = (long) (byteLen << 3);
+            for (int i = 0; i < 8; i++) {
+                tempBytes[56 + i] = (byte) (len & 0xFFL);
+                len = len >> 8;
             }
-            groups=divGroup(tempBytes,0);
+            groups = divGroup(tempBytes, 0);
             trans(groups);//处理分组
-        }else{
-            for(int i=0;i<rest;i++)
-                tempBytes[i]=inputBytes[byteLen-rest+i];
-            tempBytes[rest]=(byte)(1<<7);
-            for(int i=rest+1;i<64;i++)
-                tempBytes[i]=0;
-            groups=divGroup(tempBytes,0);
+        } else {
+            for (int i = 0; i < rest; i++)
+                tempBytes[i] = inputBytes[byteLen - rest + i];
+            tempBytes[rest] = (byte) (1 << 7);
+            for (int i = rest + 1; i < 64; i++)
+                tempBytes[i] = 0;
+            groups = divGroup(tempBytes, 0);
             trans(groups);//处理分组
 
-            for(int i=0;i<56;i++)
-                tempBytes[i]=0;
-            long len=(long)(byteLen<<3);
-            for(int i=0;i<8;i++){
-                tempBytes[56+i]=(byte)(len&0xFFL);
-                len=len>>8;
+            for (int i = 0; i < 56; i++)
+                tempBytes[i] = 0;
+            long len = (long) (byteLen << 3);
+            for (int i = 0; i < 8; i++) {
+                tempBytes[56 + i] = (byte) (len & 0xFFL);
+                len = len >> 8;
             }
-            groups=divGroup(tempBytes,0);
+            groups = divGroup(tempBytes, 0);
             trans(groups);//处理分组
         }
 
         //将Hash值转换成十六进制的字符串
-        String resStr="";
-        long temp=0;
-        for(int i=0;i<4;i++){
-            for(int j=0;j<4;j++){
-                temp=result[i]&0x0FL;
-                String a=hexs[(int)(temp)];
-                result[i]=result[i]>>4;
-                temp=result[i]&0x0FL;
-                resStr+=hexs[(int)(temp)]+a;
-                result[i]=result[i]>>4;
+        String resStr = "";
+        long temp = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                temp = result[i] & 0x0FL;
+                String a = hexs[(int) (temp)];
+                result[i] = result[i] >> 4;
+                temp = result[i] & 0x0FL;
+                resStr += hexs[(int) (temp)] + a;
+                result[i] = result[i] >> 4;
             }
         }
         return resStr;
@@ -108,32 +108,35 @@ public class MD5 {
     /**
      * 从inputBytes的index开始取512位，作为新的分组
      * 将每一个512位的分组再细分成16个小组，每个小组32位（4个字节）
+     *
      * @param inputBytes
      * @param index
      * @return
      */
-    private static long[] divGroup(byte[] inputBytes,int index){
-        long [] temp=new long[16];
-        for(int i=0;i<16;i++){
-            temp[i]=b2iu(inputBytes[4*i+index])|
-                    (b2iu(inputBytes[4*i+1+index]))<<8|
-                    (b2iu(inputBytes[4*i+2+index]))<<16|
-                    (b2iu(inputBytes[4*i+3+index]))<<24;
+    private static long[] divGroup(byte[] inputBytes, int index) {
+        long[] temp = new long[16];
+        for (int i = 0; i < 16; i++) {
+            temp[i] = b2iu(inputBytes[4 * i + index]) |
+                    (b2iu(inputBytes[4 * i + 1 + index])) << 8 |
+                    (b2iu(inputBytes[4 * i + 2 + index])) << 16 |
+                    (b2iu(inputBytes[4 * i + 3 + index])) << 24;
         }
         return temp;
     }
 
     /**
      * 这时不存在符号位（符号位存储不再是代表正负），所以需要处理一下
+     *
      * @param b
      * @return
      */
-    public static long b2iu(byte b){
+    public static long b2iu(byte b) {
         return b < 0 ? b & 0x7F + 128 : b;
     }
 
     /**
      * 主要的操作，四轮循环
+     *
      * @param groups[]--每一个分组512位（64字节）
      */
     private void trans(long[] groups) {
@@ -215,10 +218,10 @@ public class MD5 {
         result[1] += b;
         result[2] += c;
         result[3] += d;
-        result[0]=result[0]&0xFFFFFFFFL;
-        result[1]=result[1]&0xFFFFFFFFL;
-        result[2]=result[2]&0xFFFFFFFFL;
-        result[3]=result[3]&0xFFFFFFFFL;
+        result[0] = result[0] & 0xFFFFFFFFL;
+        result[1] = result[1] & 0xFFFFFFFFL;
+        result[2] = result[2] & 0xFFFFFFFFL;
+        result[3] = result[3] & 0xFFFFFFFFL;
     }
 
     /**
@@ -242,33 +245,33 @@ public class MD5 {
 
     private static long FF(long a, long b, long c, long d, long x, long s,
                            long ac) {
-        a += (F(b, c, d)&0xFFFFFFFFL) + x + ac;
-        a = ((a&0xFFFFFFFFL)<< s) | ((a&0xFFFFFFFFL) >>> (32 - s));
+        a += (F(b, c, d) & 0xFFFFFFFFL) + x + ac;
+        a = ((a & 0xFFFFFFFFL) << s) | ((a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return (a&0xFFFFFFFFL);
+        return (a & 0xFFFFFFFFL);
     }
 
     private static long GG(long a, long b, long c, long d, long x, long s,
                            long ac) {
-        a += (G(b, c, d)&0xFFFFFFFFL) + x + ac;
-        a = ((a&0xFFFFFFFFL) << s) | ((a&0xFFFFFFFFL) >>> (32 - s));
+        a += (G(b, c, d) & 0xFFFFFFFFL) + x + ac;
+        a = ((a & 0xFFFFFFFFL) << s) | ((a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return (a&0xFFFFFFFFL);
+        return (a & 0xFFFFFFFFL);
     }
 
     private static long HH(long a, long b, long c, long d, long x, long s,
                            long ac) {
-        a += (H(b, c, d)&0xFFFFFFFFL) + x + ac;
-        a = ((a&0xFFFFFFFFL) << s) | ((a&0xFFFFFFFFL) >>> (32 - s));
+        a += (H(b, c, d) & 0xFFFFFFFFL) + x + ac;
+        a = ((a & 0xFFFFFFFFL) << s) | ((a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return (a&0xFFFFFFFFL);
+        return (a & 0xFFFFFFFFL);
     }
 
     private static long II(long a, long b, long c, long d, long x, long s,
                            long ac) {
-        a += (I(b, c, d)&0xFFFFFFFFL) + x + ac;
-        a = ((a&0xFFFFFFFFL) << s) | ((a&0xFFFFFFFFL) >>> (32 - s));
+        a += (I(b, c, d) & 0xFFFFFFFFL) + x + ac;
+        a = ((a & 0xFFFFFFFFL) << s) | ((a & 0xFFFFFFFFL) >>> (32 - s));
         a += b;
-        return (a&0xFFFFFFFFL);
+        return (a & 0xFFFFFFFFL);
     }
 }

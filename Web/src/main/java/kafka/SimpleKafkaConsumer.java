@@ -14,19 +14,19 @@ public class SimpleKafkaConsumer {
     private List<String> topics;
 
 
-    public void init(){
+    public void init() {
         consumer = new KafkaConsumer<>(props);
         consumer.subscribe(topics);
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 while (true) {
                     ConsumerRecords<String, String> records = consumer.poll(10000);
-                    try{
-                        for (ConsumerRecord<String, String> record : records){
+                    try {
+                        for (ConsumerRecord<String, String> record : records) {
                             System.out.println(record);
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

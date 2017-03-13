@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mongodb.task</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- 添加此依赖需要从开源中国或github下载源码打包本地安装,https://git.oschina.net/uncode/uncode-schedule.git -->

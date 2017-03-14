@@ -15,6 +15,7 @@
         <module>Entity</module>
         <module>Task</module>
         <module>Remote</module>
+        <module>Common</module>
     </modules>
 
     <properties>

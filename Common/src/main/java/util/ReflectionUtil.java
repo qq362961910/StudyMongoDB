@@ -13,6 +13,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ * 现有问题:
+ * 1. GenParent<T, X> extends GenSuper<int[]>   int[] 泛型未处理
+ * 2.始终获取不到GenParent<T, X> extends GenSuper<Double> 中Double泛型实际类型
+ *
+ * */
 public class ReflectionUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();

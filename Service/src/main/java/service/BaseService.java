@@ -1,6 +1,10 @@
 package service;
 
-public interface BaseService<Entity, IdType> {
+import entity.BaseEntity;
+
+import java.io.Serializable;
+
+public interface BaseService<Entity extends BaseEntity, IdType extends Serializable> {
 
     /**
      * save
@@ -15,11 +19,11 @@ public interface BaseService<Entity, IdType> {
     /**
      * removeById
      */
-    void removeById(IdType id);
+    void removeById(IdType id, Class<Entity> entityClass);
 
     /**
      * queryById
      */
-    Entity queryById(IdType id);
+    Entity queryById(IdType id, Class<Entity> entityClass);
 
 }

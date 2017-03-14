@@ -1,7 +1,7 @@
 import config.ApplicationConfig;
 import entity.test.Address;
 import entity.test.Book;
-import entity.test.Student;
+import entity.Student;
 import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.junit.runner.RunWith;

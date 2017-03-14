@@ -1,6 +1,7 @@
-package entity.test;
+package entity;
 
-import entity.BaseEntity;
+import entity.test.Address;
+import entity.test.Book;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;

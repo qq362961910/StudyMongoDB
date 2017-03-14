@@ -19,11 +19,11 @@ public interface BaseDao<Entity extends BaseEntity, IdType extends Serializable>
     /**
      * delete
      */
-    void deleteById(IdType id);
+    <T> void deleteById(IdType id, Class<Entity> type);
 
     /**
      * selectById
      */
-    Entity selectById(IdType id);
+    <T> Entity selectById(IdType id, Class<Entity> type);
 
 }

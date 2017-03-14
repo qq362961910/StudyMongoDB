@@ -1,5 +1,6 @@
 package entity.test;
 
+import entity.Student;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 public class Book {

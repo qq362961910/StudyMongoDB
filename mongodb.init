@@ -1,0 +1,25 @@
+1.登录
+/home/amen/mongodb/bin/mongo 192.168.4.200:22000 -u root -p 123456 --authenticationDatabase "admin"
+
+2.设置分片
+sh.addShard("replSetShard1/192.168.4.200:23000,192.168.4.200:23001,192.168.4.200:23002");
+sh.addShard("replSetShard2/192.168.4.200:23100,192.168.4.200:23101,192.168.4.200:23102");
+sh.addShard("replSetShard3/192.168.4.200:23200,192.168.4.200:23201,192.168.4.200:23202");
+
+3.查看分片状态
+db.getSiblingDB("admin").runCommand( { listShards: 1 }
+
+4.db.lbs分片键创建索引
+use vr;
+db.lbs.createIndex( {"objId": 1} )
+
+4.指定db分片生效
+use admin;
+db.runCommand( { enablesharding :"vr"});
+
+5.指定集合分片生效，并指定片键
+db.runCommand( { shardcollection : "vr.lbs",key : {objId: 1} } )
+
+6.设置过期
+use vr;
+db.lbs.createIndex( { "crTime": 1 }, { expireAfterSeconds: 7200 } );

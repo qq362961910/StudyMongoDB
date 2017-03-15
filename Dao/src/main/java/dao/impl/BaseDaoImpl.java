@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class BaseDaoImpl<Entity extends BaseEntity, IdType extends Serializable> implements BaseDao<Entity, IdType>{
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    protected MongoTemplate mongoTemplate;
 
     @Override
     public void insert(Entity entity) {
@@ -25,7 +25,7 @@ public class BaseDaoImpl<Entity extends BaseEntity, IdType extends Serializable>
     }
 
     @Override
-    public <T> void deleteById(IdType id, Class<Entity> type) {
+    public void deleteById(IdType id, Class<Entity> type) {
         Criteria filter = new Criteria();
         filter.and("_id").is(id);
         Query query = new Query(filter);
@@ -33,7 +33,7 @@ public class BaseDaoImpl<Entity extends BaseEntity, IdType extends Serializable>
     }
 
     @Override
-    public <T> Entity selectById(IdType id, Class<Entity> type) {
+    public Entity selectById(IdType id, Class<Entity> type) {
         Criteria filter = new Criteria();
         filter.and("_id").is(id);
         Query query = new Query(filter);

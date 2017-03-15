@@ -18,12 +18,12 @@ import java.util.Date;
 public class Lbs extends BaseEntity implements Serializable {
 
     /** 原始ID */
-    private Long objId;
+    private long objId;
     /** 物体类型 */
     private Integer type;
     /** 物体名称 */
     private String title;
-    //坐标位置
+    /** 坐标位置 */
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private Point loc;
     /** 位置概述 */
@@ -31,11 +31,11 @@ public class Lbs extends BaseEntity implements Serializable {
     /** 创建时间 */
     private Date crTime;
 
-    public Long getObjId() {
+    public long getObjId() {
         return objId;
     }
 
-    public Lbs setObjId(Long objId) {
+    public Lbs setObjId(long objId) {
         this.objId = objId;
         return this;
     }
@@ -83,5 +83,17 @@ public class Lbs extends BaseEntity implements Serializable {
     public Lbs setCrTime(Date crTime) {
         this.crTime = crTime;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Lbs{" +
+                "objId=" + objId +
+                ", type=" + type +
+                ", title='" + title + '\'' +
+                ", loc=" + loc +
+                ", address='" + address + '\'' +
+                ", crTime=" + crTime +
+                "} " + super.toString();
     }
 }

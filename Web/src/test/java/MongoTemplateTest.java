@@ -63,8 +63,8 @@ public class MongoTemplateTest {
 
     @Test
     public void initCoordinates() {
-        for (int i=0; i<10; i++) {
-            for (int k=0; k<10; k++) {
+        for (int i = 0; i < 10; i++) {
+            for (int k = 0; k < 10; k++) {
                 double longitude = i + k * 0.1;
                 double latitude = i + k * 0.1;
                 Point point = new Point(longitude, latitude);
@@ -73,7 +73,7 @@ public class MongoTemplateTest {
                 lbs.setTitle("title: [" + longitude + ", " + latitude + "]");
                 lbs.setLoc(point);
                 lbs.setAddress("address: [精度: " + longitude + ", 维度: " + latitude + "]");
-                lbs.setObjId(i*k + k);
+                lbs.setObjId(i * k + k);
                 lbs.setCrTime(new Date());
                 lbsService.save(lbs);
             }
@@ -84,13 +84,15 @@ public class MongoTemplateTest {
     public void testSearchNearLbs() {
         LbsDao.LbsQueryParam param = new LbsDao.LbsQueryParam();
 //        param.setTitle("title: [0.5, 0.5]");
-//        param.setAddress("address: [精度: 0.5, 维度: 0.5]");
+        param.setAddress("address: [精度: 0.5, 维度: 0.5]");
 //        param.setCoordinateType(CoordinateType.HUMAN);
 //        param.setId("58c8d70885f89417d4371e48");
 //        param.setOriginalId(1l);
         param.setLongitude(5.0);
         param.setLatitude(5.0);
-        List<Lbs>lbsList = lbsService.searchNear(param);
+        param.setMinDistance(0L);
+        param.setMaxDistance(1000000L);
+        List<Lbs> lbsList = lbsService.searchNear(param);
         System.out.println(lbsList);
     }
 

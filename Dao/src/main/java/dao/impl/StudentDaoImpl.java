@@ -6,6 +6,6 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class StudentDaoImpl extends BaseDaoImpl<Student, ObjectId> implements StudentDao{
+public class StudentDaoImpl extends BaseDaoImpl<Student, ObjectId> implements StudentDao {
 
 }

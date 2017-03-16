@@ -17,18 +17,30 @@ import java.util.Date;
 @Document(collection = "lbs")
 public class Lbs extends BaseEntity implements Serializable {
 
-    /** 原始ID */
+    /**
+     * 原始ID
+     */
     private long objId;
-    /** 物体类型 */
+    /**
+     * 物体类型
+     */
     private Integer type;
-    /** 物体名称 */
+    /**
+     * 物体名称
+     */
     private String title;
-    /** 坐标位置 */
+    /**
+     * 坐标位置
+     */
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private Point loc;
-    /** 位置概述 */
+    /**
+     * 位置概述
+     */
     private String address;
-    /** 创建时间 */
+    /**
+     * 创建时间
+     */
     private Date crTime;
 
     public long getObjId() {

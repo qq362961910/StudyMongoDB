@@ -14,12 +14,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
  * 现有问题:
  * 1. GenParent<T, X> extends GenSuper<int[]>   int[] 泛型未处理
  * 2.始终获取不到GenParent<T, X> extends GenSuper<Double> 中Double泛型实际类型
- *
- * */
+ */
 public class ReflectionUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -41,16 +39,16 @@ public class ReflectionUtil {
         classGenericity.setGenericityList(genericityList);
         // 嵌套泛型
         if (type instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType)type;
+            ParameterizedType parameterizedType = (ParameterizedType) type;
             Type rawType = parameterizedType.getRawType();
             if (rawType instanceof Class) {
-                Class superClass = (Class)rawType;
+                Class superClass = (Class) rawType;
                 if (!Object.class.equals(superClass)) {
                     TypeVariable[] superTypeVariables = superClass.getTypeParameters();
                     ClassGenericity superClassGenericity = new ClassGenericity();
                     List<Genericity> superGenericityList = new ArrayList<>();
                     superClassGenericity.setGenericityList(superGenericityList);
-                    for (TypeVariable superTypeVariable: superTypeVariables) {
+                    for (TypeVariable superTypeVariable : superTypeVariables) {
                         Genericity superGenericity = new Genericity();
                         superGenericity.setType(superTypeVariable.getName());
                         superGenericityList.add(superGenericity);
@@ -65,36 +63,32 @@ public class ReflectionUtil {
             }
             //加载父类泛型
             Type[] types = parameterizedType.getActualTypeArguments();
-            for (Type t: types) {
+            for (Type t : types) {
                 Genericity genericity = new Genericity();
                 if (t instanceof ParameterizedType) {
-                    genericity.setType(((ParameterizedType)t).getRawType().getTypeName());
+                    genericity.setType(((ParameterizedType) t).getRawType().getTypeName());
                     genericity.setEmbedClassGenericity(doGetGenericity(t));
-                }
-                else if (t instanceof TypeVariable){
+                } else if (t instanceof TypeVariable) {
                     genericity.setType(((TypeVariable) t).getName());
-                }
-                else if (t instanceof Class) {
+                } else if (t instanceof Class) {
                     genericity.setType(((Class) t).getName());
-                }
-                else {
+                } else {
                     System.out.println("[warn] run in else");
                 }
                 genericityList.add(genericity);
             }
 
-        // 处理泛型擦拭对象
+            // 处理泛型擦拭对象
         } else if (type instanceof TypeVariable) {
             Genericity genericity = new Genericity();
             genericity.setType(((TypeVariable) type).getName());
             genericityList.add(genericity);
-        // class本身也是type，强制转型
-        } else if (type instanceof Class){// class本身也是type，强制转型
+            // class本身也是type，强制转型
+        } else if (type instanceof Class) {// class本身也是type，强制转型
             Genericity genericity = new Genericity();
             genericity.setType(((Class) type).getName());
             genericityList.add(genericity);
-        }
-        else {
+        } else {
             System.out.println("[warn] run in else");
         }
         return classGenericity;
@@ -123,13 +117,13 @@ public class ReflectionUtil {
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //        System.out.println(getGenericity(StudentServiceImpl.class).toJsonString());
 //        System.out.println(getGenericity(ArrayList.class).toJsonString());
         System.out.println(getGenericity(SubParent.class).toJsonString());
     }
 
-    private static class ClassGenericity{
+    private static class ClassGenericity {
         //父类泛型
         private ClassGenericity parent;
         //泛型列表
@@ -205,9 +199,10 @@ public class ReflectionUtil {
 
     }
 
-    private static class GenParent<T, X> extends GenSuper<Double>{
+    private static class GenParent<T, X> extends GenSuper<Double> {
 
     }
+
     private static class SubParent extends GenParent<List<Map<String, Map<String, Long>>>, Set<Map<String, Integer>>> {
 
     }

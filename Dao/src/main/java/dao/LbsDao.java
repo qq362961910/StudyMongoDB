@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public interface LbsDao extends BaseDao<Lbs, ObjectId>{
+public interface LbsDao extends BaseDao<Lbs, ObjectId> {
 
 
     List<Lbs> searchNear(LbsQueryParam param);

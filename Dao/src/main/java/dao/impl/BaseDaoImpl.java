@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import java.io.Serializable;
 
-public class BaseDaoImpl<Entity extends BaseEntity, IdType extends Serializable> implements BaseDao<Entity, IdType>{
+public class BaseDaoImpl<Entity extends BaseEntity, IdType extends Serializable> implements BaseDao<Entity, IdType> {
 
     @Autowired
     protected MongoTemplate mongoTemplate;

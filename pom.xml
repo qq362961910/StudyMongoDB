@@ -74,4 +74,31 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- <repositories>
+         <repository>
+             <id>snapshots-nexus</id>
+             <name>MZONE</name>
+             <url>http://192.168.14.215:8081/nexus/content/groups/public/</url>
+             <releases>
+                 <enabled>true</enabled>
+             </releases>
+             <snapshots>
+                 <enabled>true</enabled>
+                 <updatePolicy>interval:10</updatePolicy>
+             </snapshots>
+         </repository>
+         <repository>
+             <id>mvnrepository</id>
+             <name>mvnrepository</name>
+             <url>http://www.mvnrepository.com/</url>
+             <layout>default</layout>
+             <releases>
+                 <enabled>true</enabled>
+             </releases>
+             <snapshots>
+                 <enabled>false</enabled>
+             </snapshots>
+         </repository>
+     </repositories>-->
+
 </project>

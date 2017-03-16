@@ -1,6 +1,6 @@
+import entity.Student;
 import entity.test.Address;
 import entity.test.Book;
-import entity.Student;
 import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.Before;

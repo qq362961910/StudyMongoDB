@@ -5,4 +5,5 @@ import org.bson.types.ObjectId;
 
 public interface StudentDao extends BaseDao<Student, ObjectId> {
 
+    String queryNameByEmail(String email);
 }
